@@ -1,0 +1,62 @@
+version: 2
+
+sources:
+  - name: neon_raw
+    schema: public
+    tables:
+      - name: aircraft
+        columns:
+          - name: aircraft_id
+            tests:
+              - unique
+              - not_null
+
+      - name: airlines
+        columns:
+          - name: airline_code
+            tests:
+              - unique
+              - not_null
+
+      - name: airports
+        columns:
+          - name: airport_code
+            tests:
+              - unique
+              - not_null
+
+      - name: flights
+        columns:
+          - name: flight_id
+            tests:
+              - unique
+              - not_null
+          - name: departure_airport_code
+            tests:
+              - not_null
+          - name: destination_airport_code
+            tests:
+              - not_null
+          - name: airline_code
+            tests:
+              - not_null
+          - name: aircraft_id
+            tests:
+              - not_null
+
+      - name: passenger
+        columns:
+          - name: passenger_id
+            tests:
+              - unique
+              - not_null
+
+      - name: passenger_flights
+        columns:
+          - name: pf_id
+            tests:
+              - unique
+              - not_null
+          - name: passenger_id
+            tests:
+              - not_null
