@@ -121,3 +121,5 @@ FROM distances
 |Calculated RPM|passengers * distance|"Revenue Passenger Miles: Measures the volume of ""paid"" transportation actually performed."|
 Calculated ASM|seats * distance|Available Seat Miles: Measures the total carrying capacity available to generate revenue.|
 Load Factor %|(RPM / ASM) * 100|Occupancy Rate: The primary efficiency KPI showing how well flight capacity is utilized.|
+
+- Creating the .yml in seeds and intermediate file, to keep doc up to date and start testing when building my dbt model

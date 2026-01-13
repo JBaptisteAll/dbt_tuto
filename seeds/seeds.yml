@@ -1,0 +1,17 @@
+version: 2
+
+seeds:
+  - name: airports_coordinates
+    description: "GPS coordinates for all international airports in our dataset"
+    columns:
+      - name: airport_code
+        description: "IATA 3-letter code"
+        tests:
+          - unique
+          - not_null
+      - name: latitude
+        tests:
+          - not_null
+      - name: longitude
+        tests:
+          - not_null
