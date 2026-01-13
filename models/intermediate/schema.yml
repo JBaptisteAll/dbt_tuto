@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: int_flights_performance
+    description: "Calculates flight performance metrics (RPM, ASM, Load Factor) using geospatial data."
+    columns:
+      - name: flight_id
+        tests:
+          - unique
+          - not_null
+      - name: distance_miles
+        description: "Distance in miles between airports."
+        tests:
+          - not_null # Si c'est nul, c'est qu'un aéroport manque
+      - name: load_factor_pct
+        description: "Occupancy rate of the flight."
+        tests:
+          - not_null
