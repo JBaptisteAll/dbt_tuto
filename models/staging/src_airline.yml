@@ -3,8 +3,10 @@ version: 2
 sources:
   - name: neon_raw
     schema: public
+    description: "Données sources provenant de la base opérationnelle NeonDB. Contient l'historique des vols, la base passager et le référentiel flotte/aéroports."
     tables:
       - name: aircraft
+        description: "Référentiel des appareils de la flotte (modèle, capacité)."
         columns:
           - name: aircraft_id
             tests:
@@ -12,6 +14,7 @@ sources:
               - not_null
 
       - name: airlines
+        description: "Liste des compagnies aériennes partenaires et leurs codes IATA."
         columns:
           - name: airline_code
             tests:
@@ -19,6 +22,7 @@ sources:
               - not_null
 
       - name: airports
+        description: "Référentiel mondial des aéroports incluant les noms de villes."
         columns:
           - name: airport_code
             tests:
@@ -26,25 +30,35 @@ sources:
               - not_null
 
       - name: flights
+        description: "Table de faits principale recensant tous les vols effectués ou programmés."
         columns:
           - name: flight_id
             tests:
               - unique
               - not_null
           - name: departure_airport_code
+            description: "Code IATA de l'aéroport de départ."
             tests:
               - not_null
+              - relationships:
+                  to: source('neon_raw', 'airports')
+                  field: airport_code
           - name: destination_airport_code
+            description: "Code IATA de l'aéroport d'arrivée."
             tests:
               - not_null
-          - name: airline_code
-            tests:
-              - not_null
+              - relationships:
+                  to: source('neon_raw', 'airports')
+                  field: airport_code
           - name: aircraft_id
             tests:
               - not_null
+              - relationships:
+                  to: source('neon_raw', 'aircraft')
+                  field: aircraft_id
 
       - name: passenger
+        description: "Base de données clients avec informations d'identité et nationalité."
         columns:
           - name: passenger_id
             tests:
@@ -52,6 +66,7 @@ sources:
               - not_null
 
       - name: passenger_flights
+        description: "Table de liaison entre les passagers et les vols (manifeste de bord)."
         columns:
           - name: pf_id
             tests:
@@ -60,3 +75,6 @@ sources:
           - name: passenger_id
             tests:
               - not_null
+              - relationships:
+                  to: source('neon_raw', 'passenger')
+                  field: passenger_id

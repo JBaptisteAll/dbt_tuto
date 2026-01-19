@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: mart_route_performance
+    description: "Analyse agrégée de la performance par axe géographique (Route)."
+    columns:
+      - name: route_name
+        description: "Identifiant de la route (ex: CDG-JFK)."
+        tests: [not_null]
+      - name: route_load_factor_pct
+        tests: [not_null]
+
+  - name: mart_airline_performance
+    description: "Analyse comparative de la performance opérationnelle par compagnie aérienne."
+    columns:
+      - name: airline_name
+        description: "Nom complet de la compagnie aérienne."
+        tests: [unique, not_null]
+      - name: avg_airline_load_factor_pct
+        description: "Taux de remplissage moyen pondéré de la compagnie."

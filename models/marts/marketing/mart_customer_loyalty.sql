@@ -1,40 +1,20 @@
-{{ config(materialized='table') }}
-
-WITH passenger_flights AS (
-    SELECT * FROM {{ ref('stg_passenger_flights') }}
-),
-
-passengers AS (
-    SELECT * FROM {{ ref('stg_passenger') }}
-),
-
-flight_performance AS (
-    SELECT * FROM {{ ref('int_flights_performance') }}
-),
-
-customer_stats AS (
-    SELECT
-        p.passenger_id,
-        p.first_name || ' ' || p.last_name AS customer_name,
-        p.nationality,
-        COUNT(pf.flight_id) AS total_flights_taken,
-        -- On utilise ici tes calculs de distance et de RPM de la couche Silver
-        ROUND(SUM(fp.distance_miles)::numeric, 2) AS total_distance_traveled_miles,
-        ROUND(AVG(fp.load_factor_pct)::numeric, 2) AS avg_flight_fill_rate
-    FROM passengers p
-    LEFT JOIN passenger_flights pf ON p.passenger_id = pf.passenger_id
-    LEFT JOIN flight_performance fp ON pf.flight_id = fp.flight_id
-    GROUP BY 1, 2, 3
+WITH passenger_stats AS (
+    SELECT 
+        p.*,
+        SUM(fp.distance_miles) AS total_distance
+    FROM {{ ref('int_passengers_enriched') }} p
+    LEFT JOIN {{ ref('stg_passenger_flights') }} pf ON p.passenger_id = pf.passenger_id
+    LEFT JOIN {{ ref('int_flights_performance') }} fp ON pf.flight_id = fp.flight_id
+    GROUP BY 1, 2, 3, 4 -- Ajusté selon les colonnes de ton intermediate enrichi
 )
 
 SELECT 
     *,
-    -- On crée une segmentation simple pour le marketing
     CASE 
-        WHEN total_distance_traveled_miles > 20000 THEN 'Platinum'
-        WHEN total_distance_traveled_miles > 10000 THEN 'Gold'
-        WHEN total_distance_traveled_miles > 5000 THEN 'Silver'
+        WHEN total_distance > 20000 THEN 'Platinum'
+        WHEN total_distance > 10000 THEN 'Gold'
+        WHEN total_distance > 5000 THEN 'Silver'
         ELSE 'Bronze'
     END AS loyalty_tier
-FROM customer_stats
-ORDER BY total_distance_traveled_miles DESC NULLS LAST
+FROM passenger_stats
+ORDER BY total_distance DESC NULLS LAST

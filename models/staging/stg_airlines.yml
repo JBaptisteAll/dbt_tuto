@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_flights
+    description: "Nettoyage de la table des vols. Filtre les données aberrantes et normalise les IDs."
+    columns:
+      - name: flight_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: "Statut du vol (Scheduled, On Time, Delayed, etc.)."
+
+  - name: stg_passengers
+    description: "Nettoyage de la table passagers. Consolide les noms et prénoms."
+    columns:
+      - name: passenger_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_airports
+    description: "Référentiel des aéroports nettoyé pour les jointures géospatiales."
+
+  - name: stg_aircraft
+    description: "Référentiel de la flotte avec capacités de sièges vérifiées."
+
+  - name: stg_passenger_flights
+    description: "Table de liaison propre entre passagers et vols."

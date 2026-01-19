@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: mart_customer_loyalty
+    description: "Main customer view for the Marketing team. Segments passengers into loyalty tiers based on their total traveled distance."
+    columns:
+      - name: passenger_id
+        tests:
+          - unique
+          - not_null
+      - name: loyalty_tier
+        description: "Segmentation based on mileage: Bronze (<5k), Silver (5k-10k), Gold (10k-20k), Platinum (>20k)."
+        tests:
+          - accepted_values:
+              values: ['Bronze', 'Silver', 'Gold', 'Platinum']
