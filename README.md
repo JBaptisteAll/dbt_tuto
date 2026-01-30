@@ -1,8 +1,9 @@
 
 
 <h1 align="center">THE RISE OF THE SINGLE SOURCE: A dbt Analytics Saga</h1>
-<h1 align="center">
-![Logo](https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/logo_the_rise_of_the_single_source.png)</h1>
+
+<image align="center">
+![Logo](https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/logo_the_rise_of_the_single_source.png)</image>
   
 
 ## 1. Executive Summary
