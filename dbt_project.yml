@@ -36,6 +36,8 @@ models:
         +tags: ["marketing"]
       operations:
         +tags: ["operations"]
+      executive:
+        +tags: ["executive"]  
 
 # Configuration des Snapshots (Anticipation)
 snapshots:

@@ -2,17 +2,36 @@ version: 2
 
 models:
   - name: int_flights_performance
-    description: "Calculates flight performance metrics (RPM, ASM, Load Factor) using geospatial data."
+    description: "Calcul des metrics de performance par vol (RPM, ASM, Load Factor)."
     columns:
       - name: flight_id
-        tests:
-          - unique
-          - not_null
+        tests: [unique, not_null]
+      - name: airline_code
+        tests: [not_null]  
       - name: distance_miles
-        description: "Distance in miles between airports."
-        tests:
-          - not_null # Si c'est nul, c'est qu'un aéroport manque
-      - name: load_factor_pct
-        description: "Occupancy rate of the flight."
-        tests:
-          - not_null
+        tests: [not_null]
+
+  - name: int_airports_geo_distances
+    description: "Moteur géospatiale centralisant le calcul de la distance Haversine entre chaque paire d'aéroports."
+    columns:
+      - name: departure_airport_code
+        tests: [not_null]
+      - name: destination_airport_code
+        tests: [not_null]
+      - name: distance_miles
+        tests: [not_null]
+        description: "Distance calculée via la formule Grand Cercle."
+
+  - name: int_passengers_enriched
+    description: "Référentiel passagers consolidé avec le nombre total de vols effectués."
+    columns:
+      - name: passenger_id
+        tests: [unique, not_null]
+      - name: full_name
+        description: "Concaténation du prénom et du nom."
+
+  - name: int_airlines_enriched
+    description: "Référentiel des compagnies aériennes utilisé pour enrichir les analyses de performance."
+    columns:
+      - name: airline_code
+        tests: [unique, not_null]

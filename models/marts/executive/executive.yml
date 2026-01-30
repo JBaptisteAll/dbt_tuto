@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: mart_ceo_route_performance
+    description: >
+      Rapport décisionnel comparant la performance des routes individuelles 
+      par rapport à la moyenne de leur compagnie respective.
+    columns:
+      - name: trip
+        description: "Libellé lisible du trajet avec emojis (Villes)."
+      - name: performance_vs_avg
+        description: "Différence en points de pourcentage entre la route et la moyenne compagnie."
+      - name: status
+        description: "Classification qualitative (💎 Route Étoile, ⚠️ Sous-performance, ✅ Stable)."
+        tests:
+          - accepted_values:
+              values: ['💎 Route Étoile', '⚠️ Sous-performance', '✅ Stable']
+      - name: is_priority_route
+        description: "Flag booléen pour les routes à fort volume et fort remplissage."
+        tests:
+          - not_null

@@ -2,17 +2,24 @@ version: 2
 
 models:
   - name: mart_route_performance
-    description: "Analyse agrégée de la performance par axe géographique (Route)."
+    description: "Analyse agrégée de la performance par route et par compagnie."
     columns:
+      - name: airline_code
+        description: "Code IATA de la compagnie (Clé de jointure)."
+        tests: [not_null]
       - name: route_name
         description: "Identifiant de la route (ex: CDG-JFK)."
         tests: [not_null]
       - name: route_load_factor_pct
         tests: [not_null]
+        description: "Taux de remplissage calculé au niveau de la route."
 
   - name: mart_airline_performance
     description: "Analyse comparative de la performance opérationnelle par compagnie aérienne."
     columns:
+      - name: airline_code
+        description: "Code unique de la compagnie (PK)."
+        tests: [unique, not_null]
       - name: airline_name
         description: "Nom complet de la compagnie aérienne."
         tests: [unique, not_null]

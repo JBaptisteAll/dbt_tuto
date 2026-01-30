@@ -8,6 +8,7 @@ airlines AS (
 
 airline_metrics AS (
     SELECT
+        fp.airline_code,
         al.airline_name,
         COUNT(fp.flight_id) AS total_flights,
         SUM(fp.final_passenger_count) AS total_passengers,
@@ -20,7 +21,7 @@ airline_metrics AS (
         ) AS avg_airline_load_factor_pct
     FROM flight_perf fp
     INNER JOIN airlines al ON fp.airline_code = al.airline_code
-    GROUP BY 1
+    GROUP BY 1, 2
 )
 
 SELECT * FROM airline_metrics

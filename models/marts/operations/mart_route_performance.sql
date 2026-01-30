@@ -8,7 +8,8 @@ airports AS (
 
 route_metrics AS (
     SELECT
-        -- On recrée les labels ici 
+        -- On recrée les labels ici
+        fp.airline_code, 
         fp.departure_airport_code,
         fp.destination_airport_code,
         fp.departure_airport_code || '-' || fp.destination_airport_code AS route_name,
@@ -24,7 +25,7 @@ route_metrics AS (
     FROM flight_perf fp
     LEFT JOIN airports a1 ON fp.departure_airport_code = a1.airport_code
     LEFT JOIN airports a2 ON fp.destination_airport_code = a2.airport_code
-    GROUP BY 1, 2, 3, 4, 5
+    GROUP BY 1, 2, 3, 4, 5, 6
 )
 
 SELECT 
