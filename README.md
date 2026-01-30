@@ -2,9 +2,10 @@
 
 <h1 align="center">THE RISE OF THE SINGLE SOURCE: A dbt Analytics Saga</h1>
 
-<image align="center">
-![Logo](https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/logo_the_rise_of_the_single_source.png)</image>
-  
+![Logo](https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/logo_the_rise_of_the_single_source.png)
+<p align="center">
+  <img src="https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/logo_the_rise_of_the_single_source.png" alt="Texte alternatif" width="500">
+</p>  
 
 ## 1. Executive Summary
 This project demonstrates a production-grade ELT pipeline built with **dbt (data build tool)**.   
