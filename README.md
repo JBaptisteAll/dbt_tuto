@@ -2,7 +2,7 @@
 
 <h1 align="center">THE RISE OF THE SINGLE SOURCE: A dbt Analytics Saga</h1>  
 
-![Logo](https://github.com/JBaptisteAll/RETURN_OF_THE_JET_HIGH-_An_SQL_Airline_Analytics_Project/blob/main/Assets/logo_return_of_the_jet_high.png)
+![Logo](https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/logo_the_rise_of_the_single_source.png)
 
 
 ## 1. Executive Summary
@@ -27,7 +27,7 @@ The project follows a modular **Directed Acyclic Graph (DAG)** structure to ensu
 ### Data Lineage & DAG
 The Directed Acyclic Graph (DAG) below illustrates the end-to-end flow, from raw ingestion to the final executive dashboard.
 
-![Lineage](https://github.com/JBaptisteAll/RETURN_OF_THE_JET_HIGH-_An_SQL_Airline_Analytics_Project/blob/main/Assets/logo_return_of_the_jet_high.png)
+![Lineage](https://github.com/JBaptisteAll/dbt_tuto/blob/main/assets/dbt-dag.png)
 
 ### Modeling Layers
 
